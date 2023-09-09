@@ -1,9 +1,16 @@
 import ExpenseDate from "./ExpenseDate";
+import { useState } from "react";
 import "./ExpenseItem.css";
-import Card from "./Card";
+import Card from "../UI/Card";
 
-// Parameters broken down by Object destructuring
-function ExpenseItem({ date, title, amount }) {
+function ExpenseItem({ date, pTitle, amount }) {
+  const [title, setTitle] = useState(pTitle);
+
+  const clickHandler = () => {
+    setTitle("Updated");
+    console.log(title);
+  };
+
   return (
     <Card className="expense-item">
       <ExpenseDate date={date} />
@@ -11,6 +18,7 @@ function ExpenseItem({ date, title, amount }) {
         <h2>{title}</h2>
         <div className="expense-item__price">£{amount}</div>
       </div>
+      <button onClick={clickHandler}>Change Title</button>
     </Card>
   );
 }
